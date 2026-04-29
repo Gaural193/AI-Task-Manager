@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>✨ AI Task Manager</h1>
+            <p>Smart task management powered by AI</p>
+        </header>
+
+        <main class="main-content">
+            <section class="task-form-section glass-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('ai')">AI Assistant</button>
+                    <button class="tab-btn" onclick="switchTab('manual')">Manual Entry</button>
+                </div>
+
+                <!-- AI Form -->
+                <div id="ai-form-container" class="form-container active">
+                    <form id="ai-form">
+                        <div class="input-group">
+                            <label for="ai-prompt">Describe your task in plain language:</label>
+                            <textarea id="ai-prompt" placeholder="e.g., Remind me to submit the quarterly report before next Friday" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn" id="ai-submit-btn">
+                            <span class="btn-text">Generate Task</span>
+                            <div class="spinner hidden"></div>
+                        </button>
+                    </form>
+                    <div id="ai-result" class="hidden result-box">
+                        <p class="success-text">Task structured successfully! You can review or edit below.</p>
+                    </div>
+                </div>
+
+                <!-- Manual / Edit Form -->
+                <div id="manual-form-container" class="form-container hidden">
+                    <form id="task-form">
+                        <input type="hidden" id="task-id">
+                        <div class="input-group">
+                            <label for="title">Title <span class="required">*</span></label>
+                            <input type="text" id="title" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="description">Description</label>
+                            <textarea id="description"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" id="dueDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="priority">Priority</label>
+                                <select id="priority">
+                                    <option value="LOW">Low</option>
+                                    <option value="MEDIUM" selected>Medium</option>
+                                    <option value="HIGH">High</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="status">Status</label>
+                                <select id="status">
+                                    <option value="TODO" selected>To Do</option>
+                                    <option value="IN_PROGRESS">In Progress</option>
+                                    <option value="DONE">Done</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn secondary-btn" onclick="resetForm()">Clear</button>
+                            <button type="submit" class="btn primary-btn" id="save-task-btn">Save Task</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="board-section">
+                <div class="column" id="col-todo">
+                    <h2 class="column-header"><span class="dot todo-dot"></span> To Do</h2>
+                    <div class="task-list" id="list-TODO"></div>
+                </div>
+                <div class="column" id="col-inprogress">
+                    <h2 class="column-header"><span class="dot inprogress-dot"></span> In Progress</h2>
+                    <div class="task-list" id="list-IN_PROGRESS"></div>
+                </div>
+                <div class="column" id="col-done">
+                    <h2 class="column-header"><span class="dot done-dot"></span> Done</h2>
+                    <div class="task-list" id="list-DONE"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
